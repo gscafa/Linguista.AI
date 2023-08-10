@@ -7,7 +7,9 @@ const Character = require("./models/character");
 
 let dbURI;
 let db;
-let ai = require("./openai.json");
+const ai = require("./openai.json");
+const helloes = require("./helloes.json");
+
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
 
@@ -41,21 +43,11 @@ app.set("trust proxy", true);
 
 app.use(express.static(__dirname + '/views'));
 
-const character = "Leonardo Da Vinci";
-const language = "Italian";
-const age = 8;
-const initialPrompt = "You are impersonating " + character + ", you will speak " + language + ". Speak to me as if I were a " + age + " year old. Speak to me keeping in mind that I'm not a native speaker so use an easy set of words. You are friendly. Your response won't be longer than 35 words";
-const gradingPrompt = "You are a " + language + " teacher, your job is to correct a sentence. Provide an explanation of the mistake if there is and grade the gravity of the error using these levels: 0 = no mistakes, 1 = small mistake, 2 = bad mistake, 3 = very bad mistake. The response will be no longer than 30 words and will be structured like the following example: 'Gravity : 1 - Explanation: .... ' .The sentence is the following: "; 
 
-
-
-//const messages = [{ role: "system", content: initialPrompt }];
 
 
 const initializeChat = (req, character, language) =>{
     
-    //const character = "Leonardo Da Vinci";
-    //const language = "Italian";
     const age = 8;
     const initialPrompt = "You are impersonating " + character + ", you will speak " + language + ". Speak to me as if I were a " + age + " year old. Speak to me keeping in mind that I'm not a native speaker so use an easy set of words. You are friendly. Your response won't be longer than 35 words";
     const messages = [{ role: "system", content: initialPrompt }];
@@ -107,12 +99,14 @@ app.get("/",  (req, res) =>{
 app.get("/chat", (req, res) =>{
     if(!req.session.messages)
         initializeChat(req, req.query.character, req.query.language);
+
+    const greeting = helloes[req.query.language];
     
     Character.findOne()
     .where("name").equals(req.query.character)
     .then(result =>{
         const character = result;
-        res.render("chat", {character});
+        res.render("chat", {character, greeting});
     })
     .catch(err =>{
         res.render("/");
