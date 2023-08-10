@@ -127,8 +127,14 @@ app.get("/chat", (req, res) =>{
     Character.findOne()
     .where("name").equals(req.query.character)
     .then(result =>{
+        if(result){
         const character = result;
         res.render("chat", {character, greeting});
+        }
+        else 
+            res.send("<h1>Error</h1>");
+
+
     })
     .catch(err =>{
         res.send("<h1>Error</h1>");
