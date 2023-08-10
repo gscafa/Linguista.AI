@@ -9,6 +9,7 @@ let dbURI;
 let db;
 const ai = require("./openai.json");
 const helloes = require("./helloes.json");
+const secret = require("./sessionSecret.json");
 
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
@@ -31,7 +32,7 @@ const openai = new OpenAIApi(configuration);
 app.use(express.urlencoded());
 
 app.use(sessions({
-    secret: "iosonoilmaginficobellocaeew2238390",
+    secret: secret.secret,
     saveUninitialized:true,
     cookie: { maxAge: 1000 * 60 * 20 },
     resave: false
@@ -154,7 +155,7 @@ app.post("/getGrading", (req, res) =>{
       .then((response) =>{
 
         let grading = parseGrading(response.data.choices[0].message.content);
-        console.log(grading);
+        
         gravitySum += grading.gravity;
 
         res.status(200).json({output: grading});

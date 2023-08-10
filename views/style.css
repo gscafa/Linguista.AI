@@ -44,7 +44,8 @@ body{
    
     background-color: white;
    
-    filter: invert(0);
+    filter: invert(71%) sepia(73%) saturate(514%) hue-rotate(34deg) brightness(95%) contrast(89%);
+    /*filter: invert(0);*/
 }
 
 .top-bar .logo{
