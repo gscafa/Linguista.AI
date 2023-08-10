@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linguista.AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <header>
+        <%- include("./header.ejs") %>
+    </header>
+
+
+<div class="chat-container">
+
+    <div class="chat-contact-container">
+
+<div class="chat-contact">
+
+<img src="assets/characters/<%=character.imgPath%>" alt="contact">
+<div style="display: inline">
+<span><%=character.name %></span>
+</div>
+
+
+
+</div>
+</div>
+
+<div class="messages" id="messages">
+
+<div class="system-message">
+    <span>Parla con me!</span>
+</div>
+<div style="height: 90px;"></div>
+
+
+
+
+</div>
+
+
+<div class="input-section">
+
+    <input type="text" id="input-box" class="input-textbox" placeholder="Type a message">
+    <button class="input-button" onclick="getResponse()">Send</button>
+
+</div>
+
+</div>
+
+
+<footer>
+    <%- include("./footer.ejs") %>
+</footer>
+
+
+</body>
+
+<script src="chat.js"></script>
+
+</html>

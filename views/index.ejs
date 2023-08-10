@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Linguista.AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <header>
+        <%- include("./header.ejs") %>
+    </header>
+
+<a href="/chat?character=Leonardo+Da+Vinci&language=Italian"><div class="language-card">
+    <img class="picture" src="assets/languages/italian.png" alt="language">
+    <span>Italian</span>
+
+   
+</div></a>
+
+<a href="/chat?character=Pablo+Picasso&language=Spanish"><div class="language-card">
+    <img class="picture" src="assets/languages/spanish.png" alt="language">
+    <span>Spanish</span>
+
+    
+</div></a>
+
+<a href="/chat?character=Napoleon&language=French"><div class="language-card">
+    <img class="picture" src="assets/languages/french.png" alt="language">
+    <span>French</span>
+
+    
+</div></a>
+
+<footer>
+    <%- include("./footer.ejs") %>
+</footer>
+
+
+</body>
+
+
+</html>

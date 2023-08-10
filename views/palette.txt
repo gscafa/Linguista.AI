@@ -1,0 +1,7 @@
+#0095FF blue
+#F30C93 pink
+#8ad420 green
+
+#d9be14 level 1 error
+#c7741c level 2 error
+#d92b14 level 3 error

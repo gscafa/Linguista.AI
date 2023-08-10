@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<title>Linguista.AI</title>
+
+</head>
+
+
+<body>
+
+<h1>Linguista.AI</h1>
+
+<input type="submit" id="btn" value="Vai">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    const getResponse = async () =>{
+
+      const div = document.createElement('div');
+      const h1 = document.createElement('h1');
+      //const text = document.createTextNode("...");
+
+      
+      div.appendChild(h1);
+      document.body.appendChild(div);
+      h1.innerText = "...";
+
+        let res = await fetch('http://localhost:5000/getResponse', 
+      {
+        method: 'POST',
+        headers: {
+          "Content-Type": 'application/json'                
+        },
+        body: JSON.stringify({
+          prompt: "Ciao"          
+        })
+      }
+    );
+        
+    const data = await res.json();
+    
+    if(data.output) {
+      
+      //text = document.createTextNode((data.output)[data.output.length -1].content);
+      
+      //h1.appendChild(text);
+      h1.innerText = (data.output)[data.output.length -1].content;
+    
+      }
+    
+    console.log(data);
+    }
+    
+    
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener('click', getResponse);
+    
+    
+    </script>
+</body>
+
+
+
+
+</html>
