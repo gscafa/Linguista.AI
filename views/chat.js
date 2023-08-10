@@ -119,6 +119,10 @@ if(data.output) {
 
     else
     p.innerText = "All good";
+
+
+    document.getElementById("points").innerText = "Points: " + data.points;
+    document.getElementById("streakCounter").innerText = "Streak: " + data.streakCounter + "/5";
     
     
 }
