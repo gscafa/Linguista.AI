@@ -7,6 +7,7 @@ const Character = require("./models/character");
 
 let dbURI;
 let db;
+let ai = require("./openai.json");
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
 
@@ -19,8 +20,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const configuration = new Configuration({
-    organization: "org-p5RIIkwfiGBPWhrl4hA8yu8y",
-    apiKey: "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",
+    organization: ai.organization,
+    apiKey: ai.apiKey,
   });
 
 const openai = new OpenAIApi(configuration);
