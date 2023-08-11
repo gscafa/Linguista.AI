@@ -141,6 +141,15 @@ app.get("/",  (req, res) =>{
 });
 
 app.get("/chat", (req, res) =>{
+
+    let user;
+
+    if(req.session.user)   
+        user = req.session.user;
+    else{
+        res.redirect("/login");
+    }
+
     if(!req.session.messages)
         initializeChat(req, req.query.character, req.query.language);
 
@@ -151,7 +160,7 @@ app.get("/chat", (req, res) =>{
     .then(result =>{
         if(result){
         const character = result;
-        res.render("chat", {character, greeting});
+        res.render("chat", {character, greeting, user});
         }
         else 
             res.send("<h1>Error</h1>");
@@ -179,9 +188,10 @@ app.post("/doLogin", (req, res) =>{
     .where("email").equals(req.body.email)
     .where("password").equals(req.body.password)
     .then(result =>{
-        console.log(result);
+        
         if(result){
             let user = {
+                _id : result._id,
                 name: result.name,
                 points: result.points
             };
@@ -200,6 +210,7 @@ app.post("/doLogin", (req, res) =>{
 });
 
 app.get("/doLogout", (req, res) =>{
+    User.findByIdAndUpdate(req.session.user._id, { points: req.session.user.points }); //TOFIX
 
     req.session.destroy();
     res.redirect("/");
@@ -236,7 +247,7 @@ app.post("/getResponse", async (req, res) =>{
 app.post("/getGrading", (req, res) =>{
 
     let streakCounter = req.session.streakCounter;
-    let points = req.session.points;
+    let points = req.session.user.points;
     let input = req.body.input;
     const gradingPrompt = "You are a " + req.session.language + " teacher, your job is to correct a sentence. Provide an explanation of the mistake if there is and grade the gravity of the error using these levels: 0 = no mistakes, 1 = small mistake, 2 = bad mistake, 3 = very bad mistake. The response will be no longer than 30 words and will be structured like the following example: 'Gravity : 1 - Explanation: .... ' .The sentence is the following: "; 
 
@@ -256,7 +267,7 @@ app.post("/getGrading", (req, res) =>{
         streakCounter = updateStreakCounter(grading.gravity, streakCounter);
         
 
-        req.session.points = points;
+        req.session.user.points = points;
         req.session.streakCounter = streakCounter;
 
         res.status(200).json({output: grading, points: points, streakCounter: streakCounter});
