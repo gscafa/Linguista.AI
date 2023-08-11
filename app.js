@@ -131,12 +131,31 @@ app.get("/",  (req, res) =>{
     let user;
     req.session.messages = null;
     req.session.streakCounter = 0;
-    if(req.session.user)   
-        user = req.session.user;
+    if(req.session.user){
+        
+        Character.find()
+        .then(characters =>{
+            if(characters){
+
+                user = req.session.user;
+                res.render("index", {user, characters});
+            }
+        })
+        .catch(err=>{
+            res.send("<h1>Error</h1>");
+        });
+
+
+        
+    }   
+        
+    else{
+        res.redirect("/login");
+    }
 
 
 
-    res.render("index", {user});
+    
     
 });
 
@@ -150,17 +169,17 @@ app.get("/chat", (req, res) =>{
         res.redirect("/login");
     }
 
-    if(!req.session.messages)
-        initializeChat(req, req.query.character, req.query.language);
-
-    const greeting = greetings[req.query.language];
     
-    Character.findOne()
-    .where("name").equals(req.query.character)
-    .then(result =>{
-        if(result){
-        const character = result;
-        res.render("chat", {character, greeting, user});
+
+    Character.findById(req.query.character)
+    .then(character =>{
+        if(character){
+            const greeting = greetings[character.language];
+
+            if(!req.session.messages)
+                initializeChat(req, character.name, character.language);
+
+            res.render("chat", {character, greeting, user});
         }
         else 
             res.send("<h1>Error</h1>");
@@ -210,10 +229,16 @@ app.post("/doLogin", (req, res) =>{
 });
 
 app.get("/doLogout", (req, res) =>{
-    User.findByIdAndUpdate(req.session.user._id, { points: req.session.user.points }); //TOFIX
+    User.findByIdAndUpdate(req.session.user._id, { points: req.session.user.points })
+    .then(result =>{
+        req.session.destroy();
+        res.redirect("/");
+    })
+    .catch(err =>{
+        res.send("<h1>Error</h1>");
+    });
 
-    req.session.destroy();
-    res.redirect("/");
+   
 });
 
 

@@ -113,7 +113,7 @@ body{
     margin: 15px;
     border: 3px solid #0095FF;
     border-radius: 25px;
-    font-size: 40px;
+    font-size: 30px;
     color: black;
     transition: border .1s ease;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -140,8 +140,12 @@ body{
 .language-card span{
     /*margin: 28%*/
     
-    margin: 70px;
+    
     height: fit-content;
+}
+
+.space-div{
+    height: 90px;
 }
 
 
@@ -202,7 +206,7 @@ body{
 }
 
 .input-textbox{
-
+    outline: none !important;
     height: 80%;
     width: 92%;
     font-size: 20px;

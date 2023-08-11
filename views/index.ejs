@@ -21,40 +21,20 @@
         <%- include("./header.ejs") %>
     </header>
 
-<a href="/chat?character=Leonardo+Da+Vinci&language=Italian"><div class="language-card">
-    <img class="picture" src="assets/languages/italian.png" alt="language">
-    <span>Italian</span>
+
+    <% characters.forEach(character =>{  %>
+
+   
+
+<a href="/chat?character=<%=character._id%>"><div class="language-card">
+    <img class="picture" src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language">
+    <span><%= character.name %></span>
 
    
 </div></a>
 
-<a href="/chat?character=Pablo+Picasso&language=Spanish"><div class="language-card">
-    <img class="picture" src="assets/languages/spanish.png" alt="language">
-    <span>Spanish</span>
+<% }) %>
 
-    
-</div></a>
-
-<a href="/chat?character=Napoleon&language=French"><div class="language-card">
-    <img class="picture" src="assets/languages/french.png" alt="language">
-    <span>French</span>
-
-    
-</div></a>
-
-<a href="/chat?character=Albert+Einstein&language=German"><div class="language-card">
-    <img class="picture" src="assets/languages/german.png" alt="language">
-    <span>German</span>
-
-    
-</div></a>
-
-<a href="/chat?character=Vasco+Da+Gama&language=Portuguese"><div class="language-card">
-    <img class="picture" src="assets/languages/portuguese.png" alt="language">
-    <span>Portuguese</span>
-
-    
-</div></a>
 
 <footer>
     <%- include("./footer.ejs") %>

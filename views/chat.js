@@ -61,7 +61,7 @@ const createMessage = (sender, text) =>{
 
     const div = document.createElement("div");
     const divSpace = document.createElement("div");
-    divSpace.style = "height: 90px";
+    divSpace.className = "space-div";
     div.className = sender + "-message";
     
     const span = document.createElement("span");
