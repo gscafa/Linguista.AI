@@ -129,6 +129,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.get("/",  (req, res) =>{
     let user;
+    let character = null;
     req.session.messages = null;
     req.session.streakCounter = 0;
     if(req.session.user){
@@ -138,7 +139,7 @@ app.get("/",  (req, res) =>{
             if(characters){
 
                 user = req.session.user;
-                res.render("index", {user, characters});
+                res.render("index", {user, characters, character});
             }
         })
         .catch(err=>{
@@ -286,7 +287,7 @@ app.post("/getGrading", (req, res) =>{
         
         gravitySum += grading.gravity;
 
-        points += getPointsToAdd(streakCounter, grading.gravity);
+        points[req.session.language] += getPointsToAdd(streakCounter, grading.gravity);
 
         
         streakCounter = updateStreakCounter(grading.gravity, streakCounter);
@@ -295,7 +296,11 @@ app.post("/getGrading", (req, res) =>{
         req.session.user.points = points;
         req.session.streakCounter = streakCounter;
 
-        res.status(200).json({output: grading, points: points, streakCounter: streakCounter});
+        User.findByIdAndUpdate(req.session.user._id, {points: points}).then(result =>{
+            res.status(200).json({output: grading, points: points, streakCounter: streakCounter, language: req.session.language});
+        });
+
+        
 
  
       });

@@ -116,10 +116,10 @@ if(data.output) {
         p.innerText = data.output.explanation;
 
     else
-    p.innerText = "No mistakes";
+    p.innerText = "No mistakes.";
 
 
-    document.getElementById("points").innerText = "Points: " + data.points;
+    document.getElementById("points").innerText = "Points: " + data.points[data.language];
     document.getElementById("streakCounter").innerText = "Streak: " + data.streakCounter + "/5";
     
     

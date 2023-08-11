@@ -1,6 +1,33 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const pointSchema = new mongoose.Schema({
+    Italian: {
+        type: Number,
+        default: 0},
+    
+    Spanish: {
+        type: Number,
+        default: 0},
+
+    French: {
+            type: Number,
+            default: 0},
+    Portuguese: {
+            type: Number,
+            default: 0},
+    German: {
+            type: Number,
+            default: 0},
+    English: {
+            type: Number,
+            default: 0},
+
+    
+  });
+ 
+
+
 const userSchema = new Schema({
     
     
@@ -19,10 +46,8 @@ const userSchema = new Schema({
         required: true
     },
 
-    points:{
-        type: Number,
-        required: true
-    }
+    points: pointSchema
+
 
 
 }, {timestamp: true});

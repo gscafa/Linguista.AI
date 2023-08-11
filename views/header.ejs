@@ -6,7 +6,7 @@
 
         <li><a><img class="icon" src="assets/badge.png" alt="characters"></a>
             <div class="tooltip">
-                <span id="points" class="tooltiptext">Points: <%= user? user.points : -1 %></span>
+                <span id="points" class="tooltiptext">Points: <%= character? user.points[character.language] : '' %></span>
             </div>
         </li>
 
