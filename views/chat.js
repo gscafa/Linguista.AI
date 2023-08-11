@@ -36,9 +36,7 @@ const data = await res.json();
 
 if(data.output) {
 
-//text = document.createTextNode((data.output)[data.output.length -1].content);
 
-//h1.appendChild(text);
 (lastSystemMessage.children[0]).innerText = (data.output)[data.output.length -1].content;
 
 await getGrading(lastUserMessage.children[0].innerText, lastUserMessage);
@@ -118,7 +116,7 @@ if(data.output) {
         p.innerText = data.output.explanation;
 
     else
-    p.innerText = "All good";
+    p.innerText = "No mistakes";
 
 
     document.getElementById("points").innerText = "Points: " + data.points;
@@ -127,7 +125,20 @@ if(data.output) {
     
 }
 
-}
+
+
+
+};
+
+const button = document.getElementById("send-button");
+const textBox = document.getElementById("input-box");
+
+textBox.addEventListener("keyup", function (event) {
+  
+    if (event.key === "Enter") {
+        button.click();
+    }
+});
 
 
 

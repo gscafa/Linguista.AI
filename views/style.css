@@ -87,7 +87,7 @@ body{
     padding: 5px 0;
     border-radius: 6px;
     
-    /* Position the tooltip text - see examples below! */
+    
     
     top: 100%;
     left: 50%;
@@ -97,7 +97,7 @@ body{
     transition:  width .2 ease;
   }
   
-  /* Show the tooltip text when you mouse over the tooltip container */
+
 .top-bar li:hover .tooltip .tooltiptext {
     visibility: visible;
     width: 200px;
@@ -122,7 +122,7 @@ body{
 
 .language-card:hover{
     background: linear-gradient(rgba(0,149,255,1) 0%, rgba(138,212,32,1) 100%);
-    border: 8px solid #0095FF;
+    border: 5px solid #0095FF;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
 }
@@ -320,4 +320,67 @@ body{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+
+    padding: 15px;
+    /*border: 2px solid grey;*/
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
+    width: 600px;
+    height: 800px;
+    background-color: white;
+    
+    
+}
+
+.login-container .login-input-container{
+
+    width: 220px;
+    height: 200px;
+    
+}
+
+
+
+.login-input-container input{
+    outline: none !important;
+    width: 220px;
+    height: 60px;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    border: 3px solid darkgray;
+    border-radius: 40px;
+    padding-left: 20px;
+    transition: border .2 ease;
+    font-size: 18px;
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+.login-input-container input:focus{
+    border: 3px solid rgba(0,149,255,1);
+}
+
+.login-input-container input:hover{
+    border: 3px solid rgba(0,149,255,1);
+}
+
+.login-input-container .input-button{
+    border-radius: 40px;
+    width: 245px;
+    height: 60px;
+    margin-top: 7%;
+    margin-bottom: 7%;
+}
+
 

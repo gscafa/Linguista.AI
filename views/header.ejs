@@ -6,7 +6,7 @@
 
         <li><a><img class="icon" src="assets/badge.png" alt="characters"></a>
             <div class="tooltip">
-                <span id="points" class="tooltiptext">Points: 0</span>
+                <span id="points" class="tooltiptext">Points: <%= user? user.points : -1 %></span>
             </div>
         </li>
 
@@ -22,7 +22,7 @@
             </div>
         </li>
 
-        <li><a><img class="icon" src="assets/user.png" alt="account"> </a></li>
+        <li><a href="/doLogout"><img class="icon" src="assets/user.png" alt="account"> </a></li>
 
 </ul>
 </div>

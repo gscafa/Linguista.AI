@@ -4,6 +4,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const sessions = require("express-session");
 const mongoose = require("mongoose");
 const Character = require("./models/character");
+const User = require("./models/user");
 
 let dbURI;
 let db;
@@ -56,7 +57,7 @@ const initializeChat = (req, character, language) =>{
     req.session.messages = messages;
     
     
-}
+};
 
 
 const parseGrading = (output) =>{
@@ -90,6 +91,22 @@ const getPointsToAdd = (streakCounter, gravity) =>{
   };
 
 
+const updateStreakCounter = (gravity, streakCounter) =>{
+
+    if(gravity > 0){
+        return 0;
+    }
+
+    if(streakCounter >= 5){
+        return streakCounter;
+    }
+
+    else 
+        return streakCounter + 1;
+
+};
+
+
 
 
 let interactionCounter = 0;
@@ -111,10 +128,15 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 
 app.get("/",  (req, res) =>{
+    let user;
     req.session.messages = null;
     req.session.streakCounter = 0;
-    req.session.points = 0;
-    res.render("index");
+    if(req.session.user)   
+        user = req.session.user;
+
+
+
+    res.render("index", {user});
     
 });
 
@@ -141,7 +163,48 @@ app.get("/chat", (req, res) =>{
     })
     
     
-})
+});
+
+app.get("/login", (req, res) =>{
+
+    res.render("login");
+});
+
+
+
+app.post("/doLogin", (req, res) =>{
+
+    
+    User.findOne()
+    .where("email").equals(req.body.email)
+    .where("password").equals(req.body.password)
+    .then(result =>{
+        console.log(result);
+        if(result){
+            let user = {
+                name: result.name,
+                points: result.points
+            };
+            req.session.user = user;
+            res.redirect("/");
+        }
+
+        else
+            res.redirect("/login");
+
+    }).catch(err=>{
+        res.send("<h1>Error</h1>");
+    });
+    
+
+});
+
+app.get("/doLogout", (req, res) =>{
+
+    req.session.destroy();
+    res.redirect("/");
+});
+
 
 
 app.post("/getResponse", async (req, res) =>{
@@ -189,12 +252,8 @@ app.post("/getGrading", (req, res) =>{
 
         points += getPointsToAdd(streakCounter, grading.gravity);
 
-        if((grading.gravity === 0) && (streakCounter <= 5)){
-            streakCounter++;
-        }
-        else
-            streakCounter = 0;
-
+        
+        streakCounter = updateStreakCounter(grading.gravity, streakCounter);
         
 
         req.session.points = points;
@@ -202,21 +261,9 @@ app.post("/getGrading", (req, res) =>{
 
         res.status(200).json({output: grading, points: points, streakCounter: streakCounter});
 
-        //console.log("Media: " + getAverage(gravitySum, interactionCounter));
-
-        //points += getPointsToAdd(streakCounter, grading.gravity);
-        //console.log("Punti: " + points);
-
-        //if(grading.gravity === 0)
-          //streakCounter++;
-
-        //else  
-          //streakCounter = 0;
-
-      
+ 
+      });
 
 
-        //console.log("\n\n" + response.data.choices[0].message.content + "\n\n");
-      })
 
 });
