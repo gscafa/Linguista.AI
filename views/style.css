@@ -174,7 +174,8 @@ body{
     /*border: 2px solid grey;*/
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
-    min-height: 800px;
+    min-height: 850px;
+    max-height: 850px;
 }
 
 .chat-container span{
@@ -214,6 +215,12 @@ body{
 .chat-contact span{
     margin-left: 5px;
     font-size: 30px
+}
+
+.messages{
+    
+    max-height: 560px;
+    overflow: auto;
 }
 
 

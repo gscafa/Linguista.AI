@@ -146,6 +146,7 @@ app.get("/", (req, res) =>{
     if(req.session.user)   {
         let user = req.session.user;
         let character = null;
+        req.session.messages = null;
         res.render("index", {user, character});
     }
       
@@ -341,10 +342,10 @@ app.post("/getGrading", (req, res) =>{
         
         gravitySum += grading.gravity;
 
-        points[req.session.language] += getPointsToAdd(streakCounter, grading.gravity);
-
         
         streakCounter = updateStreakCounter(grading.gravity, streakCounter);
+
+        points[req.session.language] += getPointsToAdd(streakCounter, grading.gravity);
         
 
         req.session.user.points = points;

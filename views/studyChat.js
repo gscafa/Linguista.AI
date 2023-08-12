@@ -2,6 +2,7 @@ const getResponse = async () =>{
 
     const inputBox = document.getElementById("input-box");
     const text = inputBox.value;
+    const container = document.getElementById("messages");
 
     createMessage("user", text);
 
@@ -37,6 +38,7 @@ if(data.output) {
 
 
 (lastSystemMessage.children[0]).innerText = (data.output)[data.output.length -1].content;
+container.scrollTop = container.scrollHeight - container.clientHeight;
 
 await getGrading(lastUserMessage.children[0].innerText, lastUserMessage);
 
@@ -70,6 +72,8 @@ const createMessage = (sender, text) =>{
     container.appendChild(div);
    
     container.appendChild(divSpace);
+    
+    container.scrollTop = container.scrollHeight - container.clientHeight;
 }
 
 
@@ -82,6 +86,8 @@ textBox.addEventListener("keyup", function (event) {
         button.click();
     }
 });
+
+
 
 
 
