@@ -11,6 +11,7 @@ let db;
 const ai = require("./openai.json");
 const greetings = require("./greetings.json");
 const secret = require("./sessionSecret.json");
+const studyPrompts = require("./studyPrompts.json");
 
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
@@ -56,6 +57,18 @@ const initializeChat = (req, character, language) =>{
     req.session.language = language;
     req.session.messages = messages;
     
+    
+};
+
+
+const initializeStudyChat = (req, language, teacherLanguage) =>{
+    
+    const initialPrompt = (studyPrompts[teacherLanguage]) + language;
+    
+    const messages = [{ role: "system", content: initialPrompt }];
+    req.session.language = language;
+    req.session.messages = messages;
+    console.log(initialPrompt);
     
 };
 
@@ -126,8 +139,48 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 
  
 
+app.get("/", (req, res) =>{
+    
+    if(req.session.user)   {
+        let user = req.session.user;
+        let character = null;
+        res.render("index", {user, character});
+    }
+      
+    else{
+        res.redirect("/login");
+    }
 
-app.get("/",  (req, res) =>{
+    
+
+});
+
+app.get("/studyMode", (req, res) =>{
+
+    const language = req.query.language;
+    const teacherLanguage = req.query.teacherLanguage;
+    const character = null;
+
+    let user;
+
+    if(req.session.user)   
+        user = req.session.user;
+    else{
+        res.redirect("/login");
+    }
+
+            const greeting = greetings[teacherLanguage];
+
+            if(!req.session.messages)
+                initializeStudyChat(req, language, teacherLanguage);
+
+            res.render("study_chat", {character, greeting, language, user});
+        
+})
+
+
+
+app.get("/practiceMode",  (req, res) =>{
     let user;
     let character = null;
     req.session.messages = null;
@@ -139,7 +192,7 @@ app.get("/",  (req, res) =>{
             if(characters){
 
                 user = req.session.user;
-                res.render("index", {user, characters, character});
+                res.render("practice_mode", {user, characters, character});
             }
         })
         .catch(err=>{
@@ -153,14 +206,11 @@ app.get("/",  (req, res) =>{
     else{
         res.redirect("/login");
     }
-
-
-
-    
     
 });
 
-app.get("/chat", (req, res) =>{
+
+app.get("/practiceChat", (req, res) =>{
 
     let user;
 
@@ -180,7 +230,7 @@ app.get("/chat", (req, res) =>{
             if(!req.session.messages)
                 initializeChat(req, character.name, character.language);
 
-            res.render("chat", {character, greeting, user});
+            res.render("practice_chat", {character, greeting, user});
         }
         else 
             res.send("<h1>Error</h1>");
@@ -189,7 +239,7 @@ app.get("/chat", (req, res) =>{
     })
     .catch(err =>{
         res.send("<h1>Error</h1>");
-    })
+    });
     
     
 });

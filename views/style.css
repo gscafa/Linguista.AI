@@ -4,7 +4,13 @@ body{
     font-family: 'Varela Round', sans-serif;
 }
 
+.show{
+    display:flex;
+}
 
+.hide{
+    display: none;
+}
 
 .top-bar{
     background: radial-gradient(circle, rgba(138,212,32,1) 0%, rgba(0,149,255,1) 100%);
@@ -108,9 +114,9 @@ body{
     width: 200px;
   }
 
-.language-card{
+.card{
     display: inline-block;
-    
+    text-align: center;
     
     width: 300px;
     height: 340px;
@@ -125,16 +131,16 @@ body{
 
 }
 
-.language-card:hover{
+.card:hover{
     background: linear-gradient(rgba(0,149,255,1) 0%, rgba(138,212,32,1) 100%);
     border: 5px solid #0095FF;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
 }
 
-.language-card .picture{
+.card .flag-picture{
     
-    margin-left: 50px;
+    
     width: 200px;
     height: 180px;
     
@@ -142,7 +148,14 @@ body{
     margin: 0px 0px 0px 48px;*/
 }
 
-.language-card span{
+.card .mode-picture{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 180px;
+    height: 180px;
+}
+
+.card span{
     /*margin: 28%*/
     
     
@@ -170,13 +183,20 @@ body{
 
 .chat-contact-container{
     display: flex;
-    
+    justify-content: space-between;
     margin-top: 10px;
     margin-bottom: 20px;
     
     border-radius: 10px;
     padding: 10px;
 
+}
+
+.chat-contact-container img{
+    
+  
+    width: 100px;
+    height: 90px;
 }
 
 .chat-contact{
@@ -391,5 +411,43 @@ body{
     margin-top: 7%;
     margin-bottom: 7%;
 }
+
+
+.languages-selector{
+
+    position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: 3px solid #0095FF;
+    border-radius: 25px;
+    font-size: 30px;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.selector{
+    width: 270px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 20px;
+    
+}
+
+.languages-selector .input-button{
+    border-radius: 40px;
+    width: 245px;
+    height: 60px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+
 
 
