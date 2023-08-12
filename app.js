@@ -2,9 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
 const sessions = require("express-session");
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const Character = require("./models/character");
 const User = require("./models/user");
+
 
 let dbURI;
 let db;
@@ -68,7 +70,7 @@ const initializeStudyChat = (req, language, teacherLanguage) =>{
     const messages = [{ role: "system", content: initialPrompt }];
     req.session.language = language;
     req.session.messages = messages;
-    console.log(initialPrompt);
+    
     
 };
 
@@ -253,10 +255,12 @@ app.get("/login", (req, res) =>{
 
 app.post("/doLogin", (req, res) =>{
 
+    const email = req.body.email;
+    const password = crypto.createHash("sha512").update(req.body.password).digest("hex");
     
     User.findOne()
-    .where("email").equals(req.body.email)
-    .where("password").equals(req.body.password)
+    .where("email").equals(email)
+    .where("password").equals(password)
     .then(result =>{
         
         if(result){
