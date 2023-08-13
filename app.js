@@ -151,15 +151,19 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log(err);
     });
 
- 
 
 app.get("/", (req, res) =>{
+    res.render("index");
+});
+ 
+
+app.get("/selectMode", (req, res) =>{
     
     if(req.session.user)   {
         let user = req.session.user;
         let character = null;
         req.session.messages = null;
-        res.render("index", {user, character});
+        res.render("select_mode", {user, character});
     }
       
     else{
@@ -189,7 +193,7 @@ app.get("/studyMode", (req, res) =>{
             if(!req.session.messages)
                 initializeStudyChat(req, language, teacherLanguage);
 
-            res.render("study_chat", {character, greeting, language, user});
+            res.render("study_chat", {character, greeting, language, teacherLanguage, user});
         
 })
 
@@ -314,7 +318,7 @@ app.post("/doLogin", (req, res) =>{
                 points: result.points
             };
             req.session.user = user;
-            res.redirect("/");
+            res.redirect("/selectMode");
         }
 
         else
@@ -368,7 +372,7 @@ app.post("/doRegister", (req, res) =>{
         res.redirect("/login");
     })
     .catch(err =>{
-        res.redirect("register");
+        res.redirect("/register");
     })
 
 });

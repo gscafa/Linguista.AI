@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linguista.AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <header>
+        <%- include("./header.ejs") %>
+    </header>
+
+
+    
+
+   
+
+<a href="/practiceMode"><div class="card">
+    <img class="mode-picture" src="assets/practice.png" alt="practice"><br>
+    <span>Practice Mode</span>
+
+</div></a>
+
+
+<a href="#" onclick="showBox();return false;"><div class="card">
+    <img class="mode-picture" src="assets/study.png" alt="study"><br>
+    <span>Study Mode</span>
+
+</div></a>
+
+
+<div class="languages-selector hide" id="selectorBox">
+
+<div class="selector-container">
+<form method="get" action="/studyMode">
+    <label for="language">Language to study</label>
+    <select class="selector" id="language" name="language">
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="German">German</option>
+        <option value="Portuguese">Portuguese</option>
+        <option value="French">French</option>
+        <option value="Italian">Italian</option>
+        
+
+    </select>
+
+    <label for="teacher_language">Teacher Language</label>
+    <select class ="selector" id="teacher_language" name="teacherLanguage">
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="German">German</option>
+        <option value="Portuguese">Portuguese</option>
+        <option value="French">French</option>
+        <option value="Italian">Italian</option>
+
+    </select>
+
+    <button class="input-button" type="submit">Vai</button>
+    
+</form>
+<button class="input-button" onclick="hideBox()">Chiudi</button>
+</div>
+
+</div>
+
+
+
+
+<footer>
+    <%- include("./footer.ejs") %>
+</footer>
+
+
+</body>
+
+
+<script>
+
+const box = document.getElementById("selectorBox");
+
+const showBox = () =>{
+    box.classList.remove("hide");
+    box.classList.add("show");
+};
+
+
+const hideBox = () =>{
+    box.classList.remove("show");
+    box.classList.add("hide");
+}
+
+</script>
+
+</html>
