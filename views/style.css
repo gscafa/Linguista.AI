@@ -408,8 +408,8 @@ h2{
 .login-container{
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: absolute;
+    
+    position: fixed;
       top: 50%;
       left: 50%;
       margin-right: -50%;
@@ -420,16 +420,28 @@ h2{
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
     width: 600px;
-    height: 800px;
+    height: 700px;
     background-color: white;
     
     
 }
 
+
+.login-container img{
+    margin-top: 10px;
+    position: absolute;
+    width: 500px;
+    height: 111px;
+    filter: invert(1);
+    
+}
+
 .login-container .login-input-container{
 
+    position: relative;
     width: 220px;
     height: 200px;
+    top: 25%;
     
 }
 
@@ -466,12 +478,17 @@ h2{
     margin-bottom: 7%;
 }
 
-.login-container img{
-    width: 500px;
-    height: 111px;
-    filter: invert(1);
-    
+
+.login-input-container p{
+   text-align: center;
+
 }
+
+.login-input-container a{
+    text-align: center;
+    color: rgba(0,149,255,1);
+ 
+ }
 
 
 .languages-selector{
