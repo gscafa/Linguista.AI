@@ -341,6 +341,38 @@ app.get("/doLogout", (req, res) =>{
 });
 
 
+app.get("/register", (req, res) =>{
+    res.render("register");
+});
+
+
+app.post("/doRegister", (req, res) =>{
+//TODO ASYNC CHECK IF USER ALREADY EXISTS
+    const user = {
+        name: req.body.name,
+        email: req.body.email,
+        password: crypto.createHash("sha512").update(req.body.password).digest("hex"),
+        points: {
+            Italian: 0,
+            Spanish: 0,
+            French: 0,
+            Portuguese: 0,
+            German: 0,
+            English: 0
+        }
+
+    };
+
+    User.create(user)
+    .then(result =>{
+        res.redirect("/login");
+    })
+    .catch(err =>{
+        res.redirect("register");
+    })
+
+});
+
 
 app.post("/getResponse", async (req, res) =>{
 
