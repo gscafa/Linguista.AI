@@ -4,6 +4,14 @@ body{
     font-family: 'Varela Round', sans-serif;
 }
 
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
 .show{
     display:flex;
 }
@@ -160,6 +168,45 @@ body{
     
     
     height: fit-content;
+}
+
+.meter { 
+    margin-top: 30px;
+    margin-left: 7%;
+    width: 75%;
+    height: 20px;  
+    position: relative;
+    background: white;
+    border-radius: 25px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
+  }
+
+  .meter > span {
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+    background: linear-gradient(90deg, rgba(0,149,255,1) 0%, rgba(138,212,32,1) 100%);
+    
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meter p{
+    font-size: 20px;
+  }
+
+
+  .card:hover .meter {
+    background: transparent;
+}
+
+.card:hover .meter > span{
+    background: white;
 }
 
 .space-div{
@@ -461,6 +508,5 @@ body{
     margin-top: 12px;
     margin-bottom: 12px;
 }
-
 
 

@@ -22,14 +22,22 @@
     </header>
 
 
-    <% characters.forEach(character =>{  %>
+<h1>LANGUAGES</h1>
+
+<h2>Test the knowledge you acquired to practice a language. Let's go!</h2>
+
+
+    <% languages.forEach(language =>{  %>
 
    
 
-<a href="/practiceChat?character=<%=character._id%>"><div class="card">
-    <img class="flag-picture" src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language"><br>
-    <span><%= character.name %></span>
+<a href="/practiceCharacters?selectedLanguage=<%= language %>"><div class="card">
+    <img class="flag-picture" src="assets/languages/<%= language.toLowerCase() %>.png" alt="language"><br>
+    <span><%= language %></span>
 
+    <div class="meter">
+        <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: <%=((user.points[language] / maxPoints) * 100) %>%"></span>
+      </div>
    
 </div></a>
 

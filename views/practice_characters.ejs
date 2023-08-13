@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linguista.AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <header>
+        <%- include("./header.ejs") %>
+    </header>
+
+    <h1>CHARACTERS</h1>
+    <h2>Practice this language to earn points and unlock all the characters!</h2>
+<% /* eslint-disable css-propertyvalueexpected */ %>
+    <% 
+    let currentUnlocked;
+    characters.forEach(character =>{  
+        
+        if(user.points[character.language] >= pointsThresholds[character.level])
+            currentUnlocked = 1;
+
+        else 
+            currentUnlocked = 0.1;
+
+        
+        %>
+
+   
+
+<a href=" <%= (currentUnlocked === 1)? '/practiceChat?character=' + character._id : '#' %>"><div class="card">
+    <img class="flag-picture" <% /* eslint-disable css-propertyvalueexpected */ %> style="filter: brightness(<%=currentUnlocked%> )" src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language"><br>
+    <span><%= (currentUnlocked === 1)? character.name : '???'%></span>
+
+    <div class="meter">
+        <span <% /* eslint-disable css-propertyvalueexpected */ %>  style="width: <%= ((user.points[character.language] / pointsThresholds[character.level]) * 100) %>%"></span>
+        <p><%= user.points[character.language] + '/' + pointsThresholds[character.level] + ' pts' %></p>
+      </div>
+   
+</div></a>
+
+<% }) %>
+
+
+<footer>
+    <%- include("./footer.ejs") %>
+</footer>
+
+
+</body>
+
+
+</html>

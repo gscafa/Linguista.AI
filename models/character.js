@@ -17,6 +17,11 @@ const characterSchema = new Schema({
     imgPath:{
         type: String,
         required: true
+    },
+
+    level:{
+        type: Number,
+        required: true
     }
 
 }, {timestamp: true});

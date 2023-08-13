@@ -14,6 +14,14 @@ const ai = require("./openai.json");
 const greetings = require("./greetings.json");
 const secret = require("./sessionSecret.json");
 const studyPrompts = require("./studyPrompts.json");
+const maxPoints = 5500;
+const pointsThresholds = {
+    1: 0,
+    2: 1500,
+    3: 3250,
+    4: maxPoints
+};
+const languages = ["English", "Spanish", "Italian", "French", "German", "Portuguese"];
 
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
@@ -49,7 +57,11 @@ app.set("trust proxy", true);
 app.use(express.static(__dirname + '/views'));
 
 
-
+const compareByLevel = (a, b) =>{
+    return a.level - b.level;
+};
+  
+  
 
 const initializeChat = (req, character, language) =>{
     
@@ -183,19 +195,42 @@ app.get("/studyMode", (req, res) =>{
 
 
 
-app.get("/practiceMode",  (req, res) =>{
+app.get("/practiceMode", (req, res) =>{
+
     let user;
     let character = null;
+    req.session.messages = null;
+    req.session.streakCounter = 0;
+
+    if(req.session.user){
+
+        user = req.session.user;
+        res.render("practice_mode", {user, character, languages, maxPoints});
+    }
+
+    else
+    res.redirect("/login");
+    
+});
+
+
+app.get("/practiceCharacters",  (req, res) =>{
+    let user;
+    let character = {
+        language: req.query.selectedLanguage
+    };
     req.session.messages = null;
     req.session.streakCounter = 0;
     if(req.session.user){
         
         Character.find()
+        .where("language").equals(req.query.selectedLanguage)
         .then(characters =>{
             if(characters){
-
+                // Sort the array by age in ascending order
+                characters.sort(compareByLevel);
                 user = req.session.user;
-                res.render("practice_mode", {user, characters, character});
+                res.render("practice_characters", {user, characters, character, pointsThresholds});
             }
         })
         .catch(err=>{
@@ -228,12 +263,20 @@ app.get("/practiceChat", (req, res) =>{
     Character.findById(req.query.character)
     .then(character =>{
         if(character){
-            const greeting = greetings[character.language];
 
-            if(!req.session.messages)
-                initializeChat(req, character.name, character.language);
+            if( (user.points[character.language] < pointsThresholds[character.level]) )
+                res.redirect("/practiceCharacters?selectedLanguage=" + character.language);
 
-            res.render("practice_chat", {character, greeting, user});
+            else{
+
+                const greeting = greetings[character.language];
+
+                if(!req.session.messages)
+                    initializeChat(req, character.name, character.language);
+
+                res.render("practice_chat", {character, greeting, user});
+
+            }
         }
         else 
             res.send("<h1>Error</h1>");
