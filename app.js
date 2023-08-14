@@ -22,6 +22,7 @@ const pointsThresholds = {
     4: maxPoints
 };
 const languages = ["English", "Spanish", "Italian", "French", "German", "Portuguese"];
+const numberOfLanguages = 6;
 
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
@@ -374,6 +375,24 @@ app.post("/doRegister", (req, res) =>{
     .catch(err =>{
         res.redirect("/register");
     })
+
+});
+
+
+app.get("/user", (req, res) =>{
+
+
+    let user;
+    let character = null;
+
+    if(req.session.user){
+        user = req.session.user;
+        res.render("user_info", {user, character});
+    }
+        
+    else{
+        res.redirect("/login");
+    }
 
 });
 

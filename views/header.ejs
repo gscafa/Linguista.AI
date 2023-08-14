@@ -1,12 +1,29 @@
 
+<%  let sum = 0;
+
+if(user)
+
+for (const value of Object.values(user.points)) {
+    console.log(value);
+    if(typeof value === "number")
+        sum += value;
+}
+   %>
+
 <div class="top-bar">
 
    <a href="<%= user? '/selectMode': '/' %>"><img class="logo" src="assets/logo.png" alt="logo"> </a>
     <ul>
 
-        <li><a><img class="icon" src="assets/badge.png" alt="characters"></a>
+        <li><a><img class="icon" src="assets/badge.png" alt="achievements"></a>
             <div class="tooltip">
-                <span id="points" class="tooltiptext">Points: <%= character? user.points[character.language] : '' %></span>
+                <span id="points" class="tooltiptext">Achievements: 4/100 %></span>
+            </div>
+        </li>
+
+        <li><a><img class="icon" src="assets/points.png" alt="points"></a>
+            <div class="tooltip">
+                <span id="points" class="tooltiptext">Points: <%= character? user.points[character.language] : sum %></span>
             </div>
         </li>
 

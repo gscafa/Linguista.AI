@@ -27,7 +27,8 @@
 <h2>Test the knowledge you've acquired to practice a language. Let's go!</h2>
 
 
-    <% languages.forEach(language =>{  %>
+    <% languages.forEach(language =>{  
+        let perc = ((user.points[language] / maxPoints) * 100).toFixed(2); %>
 
    
 
@@ -36,7 +37,8 @@
     <span><%= language %></span>
 
     <div class="meter">
-        <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: <%=((user.points[language] / maxPoints) * 100) %>%"></span>
+        <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: <%= perc %>%"></span>
+        <p><%=perc %>%</p>
       </div>
    
 </div></a>
