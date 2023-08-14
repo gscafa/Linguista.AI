@@ -240,7 +240,7 @@ h2{
 
 }
 
-.chat-contact-container img{
+.chat-contact-container .flag{
     
   
     width: 100px;
@@ -539,6 +539,45 @@ h2{
     height: 60px;
     margin-top: 12px;
     margin-bottom: 12px;
+}
+
+.language{
+    display: flex;
+    align-items: center;
+}
+
+.mult-pic{
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+    
+}
+
+.multiplier{
+    
+    align-items: center;
+    margin-right: 35px;
+    filter: invert(82%) sepia(78%) saturate(1108%) hue-rotate(328deg) brightness(96%) contrast(85%);
+    font-size: 25px;
+    
+}
+
+.user-info-container{
+
+    margin-left: 30px;
+    padding: 20px;
+}
+
+.user-stats-container{
+
+    padding: 20px;
+    margin-left: 30px;
+    width: 900px;
+    min-height: 100px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
 }
 
 

@@ -1,3 +1,13 @@
+const multipliers = {
+    0: 1,
+    1: 1,
+    2: 1.1,
+    3: 1.2,
+    4: 1.5,
+    5: 2
+};
+
+
 
 const getResponse = async () =>{
 
@@ -123,8 +133,18 @@ if(data.output) {
 
 
     document.getElementById("points").innerText = "Points: " + data.points[data.language];
-    document.getElementById("streakCounter").innerText = "Streak: " + data.streakCounter + "/5";
+    document.getElementById("streakCounter").innerText = "Streak: " + data.streakCounter;
+    const multiplierContainer = document.getElementById("multiplier-container");
+    const multiplierText = document.getElementById("multiplier-text");
+
+    if(data.streakCounter <= 5 && data.streakCounter > 1){
+        multiplierText.innerText = "x" + multipliers[data.streakCounter];
+        multiplierContainer.classList.replace("hide", "show");
+    }
+        
     
+    else if(data.streakCounter === 0)
+    multiplierContainer.classList.replace("show", "hide");
     
 }
 

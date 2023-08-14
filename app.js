@@ -23,6 +23,14 @@ const pointsThresholds = {
 };
 const languages = ["English", "Spanish", "Italian", "French", "German", "Portuguese"];
 const numberOfLanguages = 6;
+const multipliers = {
+    0: 1,
+    1: 1,
+    2: 1.1,
+    3: 1.2,
+    4: 1.5,
+    5: 2
+};
 
 if(process.env.DB_URI)
     dbURI = process.env.DB_URI;
@@ -47,7 +55,7 @@ app.use(express.urlencoded());
 app.use(sessions({
     secret: secret.secret,
     saveUninitialized:true,
-    cookie: { maxAge: 1000 * 60 * 20 },
+    cookie: { maxAge: 1000 * 60 * 40 },
     resave: false
 }));
 
@@ -106,13 +114,8 @@ const getPointsToAdd = (streakCounter, gravity) =>{
     let pointsToAdd = 60;
     pointsToAdd -= pointsToAdd * parseInt(gravity/3);
     
-    switch(streakCounter){
-      case 1: pointsToAdd *= 1.1; break;
-      case 2: pointsToAdd *= 1.2; break;
-      case 3: pointsToAdd *= 1.3; break;
-      case 4: pointsToAdd *= 1.4; break;
-      case 5: pointsToAdd *= 1.5; break;
-      default: break;
+    if(streakCounter <= 5){
+        pointsToAdd *= multipliers[streakCounter];
     }
   
     return parseInt(pointsToAdd);
@@ -121,16 +124,7 @@ const getPointsToAdd = (streakCounter, gravity) =>{
 
 const updateStreakCounter = (gravity, streakCounter) =>{
 
-    if(gravity > 0){
-        return 0;
-    }
-
-    if(streakCounter >= 5){
-        return streakCounter;
-    }
-
-    else 
-        return streakCounter + 1;
+        return (gravity > 0)? 0 : streakCounter + 1;
 
 };
 

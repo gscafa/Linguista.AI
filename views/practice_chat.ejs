@@ -34,7 +34,12 @@
 
 </div>
 
-<img src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language">
+
+<div class="language">
+    <div class="multiplier hide" id="multiplier-container"><img class="mult-pic" src="assets/points.png" alt="multiplier"><span id="multiplier-text"></span></div>
+    <img class="flag" src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language">
+</div>
+
 </div>
 
 <div class="messages" id="messages">

@@ -4,7 +4,6 @@
 if(user)
 
 for (const value of Object.values(user.points)) {
-    console.log(value);
     if(typeof value === "number")
         sum += value;
 }
@@ -17,7 +16,7 @@ for (const value of Object.values(user.points)) {
 
         <li><a><img class="icon" src="assets/badge.png" alt="achievements"></a>
             <div class="tooltip">
-                <span id="points" class="tooltiptext">Achievements: 4/100 %></span>
+                <span class="tooltiptext">Achievements: 4/100 %></span>
             </div>
         </li>
 
@@ -35,7 +34,7 @@ for (const value of Object.values(user.points)) {
 
         <li><a><img class="icon" src="assets/streak.png" alt="streak"></a>
             <div class="tooltip">
-                <span id="streakCounter" class="tooltiptext">Streak: 0/5</span>
+                <span id="streakCounter" class="tooltiptext">Streak: 0</span>
             </div>
         </li>
 
