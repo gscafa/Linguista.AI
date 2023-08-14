@@ -118,10 +118,13 @@ h2{
   }
   
 
+
 .top-bar li:hover .tooltip .tooltiptext {
     visibility: visible;
     width: 200px;
   }
+
+ 
 
 .card{
     display: inline-block;
@@ -512,7 +515,7 @@ h2{
  }
 
 .languages-selector-container{
-    display: flex;
+    
     flex-direction: column;
     justify-content: center;
     align-items: center;
