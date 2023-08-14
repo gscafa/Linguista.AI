@@ -424,9 +424,13 @@ h2{
 }
 
 
-.login-container img{
+.login-container #logo{
     margin-top: 10px;
     position: absolute;
+    
+}
+
+.login-container #logo img{
     width: 500px;
     height: 111px;
     filter: invert(1);
@@ -507,8 +511,11 @@ h2{
     
  }
 
-.languages-selector{
-
+.languages-selector-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: fixed;
 	top: 50%;
 	left: 50%;
@@ -522,8 +529,11 @@ h2{
     font-size: 30px;
     color: black;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    justify-content: center;
     padding: 20px;
+}
+
+.selector-item{
+    margin: 10px;
 }
 
 .selector{
@@ -534,7 +544,7 @@ h2{
     
 }
 
-.languages-selector .input-button{
+.languages-selector-container .input-button{
     border-radius: 40px;
     width: 245px;
     height: 60px;
@@ -606,6 +616,7 @@ h2{
     width: 45px;
     height: 45px;
     filter: invert(82%) sepia(78%) saturate(1108%) hue-rotate(328deg) brightness(96%) contrast(85%);
+    margin-right: 5px;
 }
 
 .user-stats-container{

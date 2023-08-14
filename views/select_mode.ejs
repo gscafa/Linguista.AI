@@ -40,10 +40,14 @@
 </div></a>
 
 
-<div class="languages-selector hide" id="selectorBox">
+<div class="languages-selector-container hide" id="selectorBox">
 
-<div class="selector-container">
+
+    
+ 
 <form method="get" action="/studyMode">
+
+    <div class="selector-item">
     <label for="language">Language to study</label>
     <select class="selector" id="language" name="language">
         <option value="English">English</option>
@@ -56,6 +60,8 @@
 
     </select>
 
+</div>
+<div class="selector-item">
     <label for="teacher_language">Teacher Language</label>
     <select class ="selector" id="teacher_language" name="teacherLanguage">
         <option value="English">English</option>
@@ -67,13 +73,18 @@
 
     </select>
 
+    </div>
+
+    <div class="selector-item">
     <button class="input-button" type="submit">Vai</button>
+    </div>
     
 </form>
+
 <button class="input-button" onclick="hideBox()">Chiudi</button>
 </div>
 
-</div>
+
 
 
 
