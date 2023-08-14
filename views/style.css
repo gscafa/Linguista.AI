@@ -587,7 +587,7 @@ h2{
 }
 
 .user-info-container span{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .user-icons{
@@ -627,6 +627,10 @@ h2{
     margin-top: 10px;
     margin-bottom: 10px;
 
+}
+
+.user-stats-item p{
+    min-width: 50px;
 }
 
 .user-stats-item .label{
