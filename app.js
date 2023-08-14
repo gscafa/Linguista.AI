@@ -378,10 +378,17 @@ app.get("/user", (req, res) =>{
 
     let user;
     let character = null;
+    let totalPoints = 0;
 
     if(req.session.user){
         user = req.session.user;
-        res.render("user_info", {user, character});
+        for (const value of Object.values(user.points)) {
+            if(typeof value === "number")
+                totalPoints += value;
+        }
+
+        let pointsPerc =  ((totalPoints / (maxPoints * numberOfLanguages)) * 100).toFixed(2);
+        res.render("user_info", {user, character, maxPoints, pointsPerc, totalPoints});
     }
         
     else{

@@ -22,14 +22,83 @@
     </header>
 
 
-<div class="user-info-container">
+<div class="user-container">
+    <div class="user-info-container">
+
+        <div class="user-name">
+            <span>Hello <%= user.name %>!</span>
+        </div>
+
+        <div class="user-icons">
+            <div class="user-icons-item" title="Points">
+                <img src="assets/points.png" alt="points">
+                <span><%= totalPoints %></span>
+            </div>
+
+            <div class="user-icons-item" title="Achievements">
+                <img src="assets/badge.png" alt="achievements">
+                <span>23/100</span>
+            </div>
+
+            <div class="user-icons-item" title="Unlocked Characters">
+                <img src="assets/character.png" alt="characters">
+                <span>6/24</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="user-stats-container">
+
+        <h3>User stats:</h3>
+
+        <div class="user-stats-item">
+            <p class="label">Points:</p>
+            <div class="meter" id="points">
+                <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: <%= pointsPerc %>%"></span>
+              </div>
+              <p><%= pointsPerc %>%</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Achievements:</p>
+            <div class="meter" id="achievements">
+                <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: 50%"></span>
+              </div>
+              <p>50%</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Characters:</p>
+            <div class="meter" id="characters">
+                <span  <% /* eslint-disable css-propertyvalueexpected */ %> style="width: 50%"></span>
+              </div>
+              <p>50%</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Record: Streak</p>
+              <p>15</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Record: Points earned in a session</p>
+              <p>15</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Average: Points earned in a session</p>
+              <p>15</p>
+        </div>
+
+        <div class="user-stats-item">
+            <p class="label">Average: Gravity of mistakes in a session</p>
+              <p>15</p>
+        </div>
+
+    </div>
 
 </div>
-
-<div class="user-stats-container">
-    
-</div>
-
 
 <footer>
     <%- include("./footer.ejs") %>

@@ -2,6 +2,7 @@
 body{
     margin: 0;
     font-family: 'Varela Round', sans-serif;
+
 }
 
 h1{
@@ -562,22 +563,82 @@ h2{
     
 }
 
+.user-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px;
+    height: 100%;
+    /*margin-left: 40px;*/
+    margin: 0 auto;
+}
+
+.user-container p{
+    font-size: 20px;
+}
+
 .user-info-container{
 
-    margin-left: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     padding: 20px;
+}
+
+.user-info-container span{
+    font-size: 25px;
+}
+
+.user-icons{
+    display: flex;
+}
+
+.user-icons-item{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.user-icons-item img{
+    width: 45px;
+    height: 45px;
+    filter: invert(82%) sepia(78%) saturate(1108%) hue-rotate(328deg) brightness(96%) contrast(85%);
 }
 
 .user-stats-container{
 
-    padding: 20px;
-    margin-left: 30px;
-    width: 900px;
+    padding: 30px;
+    
+    width: 1000px;
     min-height: 100px;
     height: fit-content;
     background-color: white;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
+}
+
+.user-stats-item{
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.user-stats-item .label{
+    margin-right: 15px;
+    margin-left: 15px;
+    min-width: 400px;
+    text-align: left;
+}
+
+.user-stats-item .meter{
+    display: flex;
+    margin: 0 15px 0 0;
 }
 
 
