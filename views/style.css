@@ -56,10 +56,21 @@ h2{
     right: 0;
 }
 
+
 .top-bar li:hover{
     background-color: white;
     border-radius: 10px;
     padding-left: 4px;
+}
+
+.top-bar li a p{
+    color: white;
+    transition: color .2s ease;
+    text-decoration: none;
+}
+
+.top-bar li:hover a p{
+    color: rgba(138,212,32,1);
 }
 
 

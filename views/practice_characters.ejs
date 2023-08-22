@@ -44,7 +44,7 @@
     <span><%= (currentUnlocked === 1)? character.name : '???'%></span>
 
     <div class="meter">
-        <span <% /* eslint-disable css-propertyvalueexpected */ %>  style="width: <%= ((user.points[character.language] / pointsThresholds[character.level]) * 100) %>%"></span>
+        <span <% /* eslint-disable css-propertyvalueexpected */ %>  style="width: <%= (user.points[character.language] >= pointsThresholds[character.level])? 100 : ((user.points[character.language] / pointsThresholds[character.level]) * 100) %>%"></span>
         <p><%= user.points[character.language] + '/' + pointsThresholds[character.level] + ' pts' %></p>
       </div>
    

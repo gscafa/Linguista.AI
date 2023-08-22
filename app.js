@@ -75,7 +75,7 @@ const compareByLevel = (a, b) =>{
 const initializeChat = (req, character, language) =>{
     
     const age = 8;
-    const initialPrompt = "You are impersonating " + character + ", you will speak " + language + ". Speak to me as if I were a " + age + " year old. Speak to me keeping in mind that I'm not a native speaker so use an easy set of words. You are friendly. Your response won't be longer than 35 words";
+    const initialPrompt = "You are impersonating " + character + ", you will speak " + language + ". Speak to me keeping in mind that I'm not a native speaker so use an easy set of words. You are friendly. Your response won't be longer than 35 words";
     const messages = [{ role: "system", content: initialPrompt }];
     req.session.language = language;
     req.session.messages = messages;
