@@ -14,7 +14,7 @@ const ai = require("./openai.json");
 const greetings = require("./greetings.json");
 const secret = require("./sessionSecret.json");
 const studyPrompts = require("./studyPrompts.json");
-const maxPoints = 5500;
+const maxPoints = 7000;
 const pointsThresholds = {
     1: 0,
     2: 1500,

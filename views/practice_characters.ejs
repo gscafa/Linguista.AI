@@ -40,7 +40,7 @@
    
 
 <a href=" <%= (currentUnlocked === 1)? '/practiceChat?character=' + character._id : '#' %>"><div class="card">
-    <img class="flag-picture" <% /* eslint-disable css-propertyvalueexpected */ %> style="filter: brightness(<%=currentUnlocked%> )" src="assets/languages/<%= character.language.toLowerCase() %>.png" alt="language"><br>
+    <img class="flag-picture" <% /* eslint-disable css-propertyvalueexpected */ %> style="filter: brightness(<%=currentUnlocked%> )" src="assets/characters/<%= character.imgPath %>" alt="language"><br>
     <span><%= (currentUnlocked === 1)? character.name : '???'%></span>
 
     <div class="meter">
